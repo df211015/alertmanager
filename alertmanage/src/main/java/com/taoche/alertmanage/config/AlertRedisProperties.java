@@ -1,10 +1,15 @@
 package com.taoche.alertmanage.config;
 
-
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * @program: spring-boot-example
+ * @description:
+ * @author:
+ * @create: 2018-05-16 15:15
+ **/
 @Data
 @Configuration
 @ConfigurationProperties(prefix = "spring.redis-alert")
@@ -13,7 +18,7 @@ public class AlertRedisProperties {
     private Integer port;
     private Long timeout;
     private String password;
-    private int database;
+    private Integer database;
     private JedisConfigurationProperties jedis = new JedisConfigurationProperties();
 
     @Data

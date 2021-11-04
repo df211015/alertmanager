@@ -20,20 +20,19 @@ import redis.clients.jedis.JedisPoolConfig;
 @EnableCaching
 @Configuration
 public class AlertRedisClusterConfig {
-
     @Bean("alertJedisConnectionFactory")
     public JedisConnectionFactory alertJedisConnectionFactory(AlertRedisProperties redisProperties) {
         RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration();
         //设置redis服务器的host或者ip地址
         redisStandaloneConfiguration.setHostName(redisProperties.getHost());
         //设置默认使用的数据库
-        redisStandaloneConfiguration.setDatabase(3);
+        redisStandaloneConfiguration.setDatabase(redisProperties.getDatabase());
         //设置密码
         redisStandaloneConfiguration.setPassword(RedisPassword.of(redisProperties.getPassword()));
         //设置redis的服务的端口号
         redisStandaloneConfiguration.setPort(redisProperties.getPort());
         //获得默认的连接池构造器
-        JedisClientConfiguration.JedisPoolingClientConfigurationBuilder jpcb = (JedisClientConfiguration.JedisPoolingClientConfigurationBuilder)JedisClientConfiguration.builder();
+        JedisClientConfiguration.JedisPoolingClientConfigurationBuilder jpcb = (JedisClientConfiguration.JedisPoolingClientConfigurationBuilder) JedisClientConfiguration.builder();
         //指定jedisPoolConifig来修改默认的连接池构造器
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
         jedisPoolConfig.setTestOnBorrow(true);
@@ -52,7 +51,7 @@ public class AlertRedisClusterConfig {
     }
 
     @Bean("alertRedisTemplate")
-    public RedisTemplate alertRedisTemplate(@Qualifier("alertJedisConnectionFactory") JedisConnectionFactory jedisConnectionFactory) {
+    public RedisTemplate userRedisTemplate(@Qualifier("alertJedisConnectionFactory") JedisConnectionFactory jedisConnectionFactory) {
         Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
         ObjectMapper om = new ObjectMapper();
         om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
