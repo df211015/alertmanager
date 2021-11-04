@@ -1,0 +1,13 @@
+package com.taoche.alertmanage;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class AlertmanageApplicationTests {
+
+    @Test
+    void contextLoads() {
+    }
+
+}
