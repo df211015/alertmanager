@@ -13,7 +13,7 @@ public class AlertRedisProperties {
     private Integer port;
     private Long timeout;
     private String password;
-    private int database =0;
+    private int database;
     private JedisConfigurationProperties jedis = new JedisConfigurationProperties();
 
     @Data
