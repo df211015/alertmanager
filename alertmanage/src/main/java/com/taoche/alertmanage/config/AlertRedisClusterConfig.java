@@ -51,7 +51,7 @@ public class AlertRedisClusterConfig {
     }
 
     @Bean("alertRedisTemplate")
-    public RedisTemplate userRedisTemplate(@Qualifier("alertJedisConnectionFactory") JedisConnectionFactory jedisConnectionFactory) {
+    public RedisTemplate alertRedisTemplate(@Qualifier("alertJedisConnectionFactory") JedisConnectionFactory jedisConnectionFactory) {
         Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
         ObjectMapper om = new ObjectMapper();
         om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
