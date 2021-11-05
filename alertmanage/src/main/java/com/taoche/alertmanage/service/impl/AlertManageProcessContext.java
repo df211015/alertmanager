@@ -33,15 +33,16 @@ public class AlertManageProcessContext {
      * 预警处理
      *
      * @param alertProcessType
+     * @param observeKey       业务监控key
      * @return
      */
-    public ResultDto alertProcess(EAlertProcessType alertProcessType) {
+    public ResultDto alertProcess(EAlertProcessType alertProcessType, String observeKey) {
         AbsAlertManageProcess absAlertManageProcess = this.alertProcessTypeMap.get(alertProcessType);
         if (null == absAlertManageProcess) {
             return GenerateResultFactory.generateFailureResultOfMsg("未找到处理策略类!", null);
         }
 
-        ResultDto resultDto = absAlertManageProcess.alertManageProcess();
+        ResultDto resultDto = absAlertManageProcess.alertManageProcess(observeKey);
         return resultDto;
     }
 }

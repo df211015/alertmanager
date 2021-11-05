@@ -16,7 +16,7 @@ public class AlertManageProcessOfMobile extends AbsAlertManageProcess {
     private RedisUtil redisUtil;
 
     @Override
-    public ResultDto alertManageProcess() {
+    public ResultDto alertManageProcess(String observeKey) {
 
         return GenerateResultFactory.generateSuccessResult(null);
     }

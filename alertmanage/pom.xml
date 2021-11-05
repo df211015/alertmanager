@@ -18,6 +18,7 @@
         <jedis.version>3.1.0</jedis.version>
         <fastjson.version>1.2.75</fastjson.version>
         <commons-lang3.version>3.9</commons-lang3.version>
+        <guava.version>18.0</guava.version>
     </properties>
     <dependencies>
         <dependency>
@@ -70,6 +71,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
         </dependency>
     </dependencies>
 
