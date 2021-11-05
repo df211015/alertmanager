@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -20,16 +21,26 @@ public final class RedisUtil {
     private RedisTemplate<String, Object> alertRedisTemplate;
 
     /**
+     * 获取redis获取操作对像
+     *
+     * @return
+     */
+    public ValueOperations getValueOperations() {
+        ValueOperations valueOperations = this.alertRedisTemplate.opsForValue();
+        return valueOperations;
+    }
+
+    /**
      * 高可用指定缓存失效时间
      *
      * @param key  键
-     * @param time 时间(秒)
+     * @param time 时间(毫秒)
      * @return
      */
     public Boolean expireHa(String key, Long time) {
         try {
             if (time > 0) {
-                this.alertRedisTemplate.expire(key, time, TimeUnit.SECONDS);
+                this.alertRedisTemplate.expire(key, time, TimeUnit.MILLISECONDS);
             }
             return true;
         } catch (Exception e) {
@@ -46,7 +57,7 @@ public final class RedisUtil {
      */
     public Long getHaExpire(String key) {
         try {
-            return this.alertRedisTemplate.getExpire(key, TimeUnit.SECONDS);
+            return this.alertRedisTemplate.getExpire(key, TimeUnit.MILLISECONDS);
         } catch (Exception e) {
             log.info("redis 操作异常：" + e.getMessage());
             return null;
@@ -127,13 +138,13 @@ public final class RedisUtil {
      *
      * @param key   键
      * @param value 值
-     * @param time  时间(秒) time要大于0 如果time小于等于0 将设置无限期
+     * @param time  时间(毫秒) time要大于0 如果time小于等于0 将设置无限期
      * @return true成功 false 失败
      */
     public Boolean setHa(String key, Object value, Long time) {
         try {
             if (time > 0) {
-                this.alertRedisTemplate.opsForValue().set(key, value, time, TimeUnit.SECONDS);
+                this.alertRedisTemplate.opsForValue().set(key, value, time, TimeUnit.MILLISECONDS);
             } else {
                 setHa(key, value);
             }
@@ -239,14 +250,14 @@ public final class RedisUtil {
      *
      * @param key  键
      * @param map  对应多个键值
-     * @param time 时间(秒)
+     * @param time 时间(毫秒)
      * @return true成功 false失败
      */
     public Boolean hmsetHa(String key, Map<String, Object> map, Long time) {
         try {
             this.alertRedisTemplate.opsForHash().putAll(key, map);
             if (time > 0) {
-                expire(key, time);
+                this.expire(key, time);
             }
             return true;
         } catch (Exception e) {
@@ -286,7 +297,7 @@ public final class RedisUtil {
         try {
             this.alertRedisTemplate.opsForHash().put(key, item, value);
             if (time > 0) {
-                expireHa(key, time);
+                this.expireHa(key, time);
             }
             return true;
         } catch (Exception e) {
@@ -421,7 +432,7 @@ public final class RedisUtil {
         try {
             Long count = this.alertRedisTemplate.opsForSet().add(key, values);
             if (time > 0) {
-                expireHa(key, time);
+                this.expireHa(key, time);
             }
             return count;
         } catch (Exception e) {
@@ -533,14 +544,14 @@ public final class RedisUtil {
      *
      * @param key   键
      * @param value 值
-     * @param time  时间(秒)
+     * @param time  时间(毫秒)
      * @return
      */
     public Boolean lSetHa(String key, Object value, Long time) {
         try {
             this.alertRedisTemplate.opsForList().rightPush(key, value);
             if (time > 0) {
-                expire(key, time);
+                this.expire(key, time);
             }
             return true;
         } catch (Exception e) {
@@ -559,7 +570,7 @@ public final class RedisUtil {
     public Boolean expire(String key, Long time) {
         try {
             if (time > 0) {
-                this.alertRedisTemplate.expire(key, time, TimeUnit.SECONDS);
+                this.alertRedisTemplate.expire(key, time, TimeUnit.MILLISECONDS);
             }
             return true;
         } catch (Exception e) {
@@ -597,7 +608,7 @@ public final class RedisUtil {
         try {
             this.alertRedisTemplate.opsForList().rightPushAll(key, value);
             if (time > 0) {
-                expireHa(key, time);
+                this.expireHa(key, time);
             }
             return true;
         } catch (Exception e) {

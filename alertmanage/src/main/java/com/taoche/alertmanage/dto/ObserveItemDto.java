@@ -10,6 +10,16 @@ public class ObserveItemDto {
     private String observeItemKey;
 
     /**
+     * 访问频次
+     */
+    private Integer visitCount;
+
+    /**
+     * 是否锁定,0:未锁定，1:已锁定
+     */
+    private Integer isLock;
+
+    /**
      * 时间戳
      */
     private Long timestamp;
