@@ -17,6 +17,7 @@ public class AlertManageProcessOfMobile extends AbsAlertManageProcess {
 
     @Override
     public ResultDto alertManageProcess() {
-        return null;
+
+        return GenerateResultFactory.generateSuccessResult(null);
     }
 }

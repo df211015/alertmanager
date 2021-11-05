@@ -17,6 +17,7 @@ public class AlertManageProcessOfIp extends AbsAlertManageProcess {
 
     @Override
     public ResultDto alertManageProcess() {
-        return null;
+
+        return GenerateResultFactory.generateFailureResult(null);
     }
 }
