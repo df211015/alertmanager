@@ -36,8 +36,12 @@ public class AlertManageProcessOfIp extends AbsAlertManageProcess {
             if (null != observeItemDto) {
                 Integer visitCount = observeItemDto.getVisitCount();
                 if (null != visitCount && visitCount < restrainItemDto.getMaxCount()) {
+                    //指定业务键在未锁定状态进入计数加1处理
                     observeItemDto.setVisitCount(visitCount + 1);
+                    observeItemDto.setIsLock(0);
                     this.redisUtil.setHa(redisObserveKey, JSON.toJSONString(observeItemDto), observeItemDto.getTimestamp());
+                } else {
+
                 }
             }
         }
