@@ -19,8 +19,8 @@ import java.util.Map;
 /**
  * ip频次预警
  */
-@Service(value = "AlertManageProcessOfIp")
 @Slf4j
+@Service(value = "AlertManageProcessOfIp")
 public class AlertManageProcessOfIp extends AbsAlertManageProcess {
 
     @Autowired
@@ -52,11 +52,11 @@ public class AlertManageProcessOfIp extends AbsAlertManageProcess {
                             observeItemDto = super.buildObserveItemDto(redisObserveKey, visitCount, timeInMillis, restrainItemDto.getLockTime(), ELockStatus.LOCKED.getCode());
                             this.redisUtil.setHa(redisObserveKey, JSON.toJSONString(observeItemDto), observeItemDto.getTimestamp());
                             log.info(String.format("ip:%s,已达最高访问次数:%s,被锁定:%s分钟,访问失败", observeKey, restrainItemDto.getMaxCount(), restrainItemDto.getLockTime()));
-                            return GenerateResultFactory.generateFailureResult(EResCode.Locked_maxCount_ip, null);
+                            return GenerateResultFactory.generateFailureResult(EResCode.Locked_maxCount, null);
                         }
                     } else {
                         log.info(String.format("ip:%s,已被锁定,访问失败", observeKey));
-                        return GenerateResultFactory.generateFailureResult(EResCode.Locked_ip, null);
+                        return GenerateResultFactory.generateFailureResult(EResCode.Locked, null);
                     }
                 }
             } else {

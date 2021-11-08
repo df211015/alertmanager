@@ -6,7 +6,7 @@ import com.taoche.alertmanage.dto.ResultDto;
 import java.sql.ResultSet;
 
 /**
- *
+ * 简单工厂模式
  */
 public class GenerateResultFactory {
     public static ResultDto generateSuccessResult(Object data) {

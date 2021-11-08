@@ -7,8 +7,8 @@ public enum EResCode {
     SUCCESS(1, "成功"),
     Fail(400, "失败"),
     Exception_generic(401, "异常"),
-    Locked_ip(420, "ip访问锁定"),
-    Locked_maxCount_ip(421, "ip访问超过阀值被锁定"),
+    Locked(420, "访问锁定"),
+    Locked_maxCount(421, "ip访问超过阀值被锁定"),
     ;
     private Integer code;
     private String description;
