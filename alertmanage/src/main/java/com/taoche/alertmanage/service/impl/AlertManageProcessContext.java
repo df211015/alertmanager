@@ -36,9 +36,9 @@ public class AlertManageProcessContext {
     /**
      * 预警处理
      *
-     * @param alertProcessType
+     * @param alertProcessType 预警类别
      * @param observeKey       业务监控key
-     * @return
+     * @return ResultDto
      */
     public ResultDto alertProcess(EAlertProcessType alertProcessType, String observeKey) {
         AbsAlertManageProcess absAlertManageProcess = this.alertProcessTypeMap.get(alertProcessType);
