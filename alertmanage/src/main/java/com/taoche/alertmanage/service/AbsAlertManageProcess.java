@@ -31,14 +31,17 @@ public abstract class AbsAlertManageProcess {
      * 构建监控实体
      *
      * @param observeItemKey 业务主键key
+     * @param visitCount     访问次数
      * @param timeInMillis   当时时间点
      * @param minute         过期时间,单位:分钟
+     * @param isLock         是否锁定
      * @return ObserveItemDto
      */
-    private ObserveItemDto buildObserveItemDto(String observeItemKey, Long timeInMillis, Integer minute) {
+    protected ObserveItemDto buildObserveItemDto(String observeItemKey, Integer visitCount, Long timeInMillis, Integer minute, Integer isLock) {
         if (null != observeItemKey) {
             ObserveItemDto observeItemDto = new ObserveItemDto();
             observeItemDto.setObserveItemKey(observeItemKey);
+            observeItemDto.setVisitCount(visitCount);
             Integer addMillis = minute * 60 * 1000;
             Long expireMilis = timeInMillis + addMillis;
             observeItemDto.setTimestamp(expireMilis);
@@ -59,10 +62,10 @@ public abstract class AbsAlertManageProcess {
         RestrainItemDto restrainItemDto = new RestrainItemDto();
         Integer interval = map.get(ProjConstants.Config_item_interval);
         Integer maxCount = map.get(ProjConstants.Config_item_maxCount);
-        Integer lock = map.get(ProjConstants.Config_item_lock);
+        Integer lockTime = map.get(ProjConstants.Config_item_lockTime);
         restrainItemDto.setInterval(interval);
         restrainItemDto.setMaxCount(maxCount);
-        restrainItemDto.setLock(lock);
+        restrainItemDto.setLockTime(lockTime);
 
         return restrainItemDto;
     }

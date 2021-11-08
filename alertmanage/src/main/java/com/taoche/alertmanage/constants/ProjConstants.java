@@ -20,5 +20,5 @@ public final class ProjConstants {
     /**
      * 锁定时间属性
      */
-    public static final String Config_item_lock = "lock";
+    public static final String Config_item_lockTime = "lockTime";
 }
