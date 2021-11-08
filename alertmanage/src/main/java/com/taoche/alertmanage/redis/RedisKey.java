@@ -18,6 +18,7 @@ public final class RedisKey {
 
     /**
      * 格式化redisKey
+     *
      * @param prefix
      * @param targetKey
      * @return
