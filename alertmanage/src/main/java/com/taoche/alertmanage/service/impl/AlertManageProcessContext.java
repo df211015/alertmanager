@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 策略模式实现
+ */
 @Service
 public class AlertManageProcessContext {
 
@@ -18,7 +21,8 @@ public class AlertManageProcessContext {
 
     private final Map<EAlertProcessType, AbsAlertManageProcess> alertProcessTypeMap = new HashMap<>();
 
-    public AlertManageProcessContext(@Qualifier("AlertManageProcessOfIp") AbsAlertManageProcess absAlertManageProcessOfIp, @Qualifier("AlertManageProcessOfMobile") AbsAlertManageProcess getAbsAlertManageProcessOfMobile) {
+    public AlertManageProcessContext(@Qualifier("AlertManageProcessOfIp") AbsAlertManageProcess absAlertManageProcessOfIp,
+                                     @Qualifier("AlertManageProcessOfMobile") AbsAlertManageProcess getAbsAlertManageProcessOfMobile) {
         this.absAlertManageProcessOfIp = absAlertManageProcessOfIp;
         this.getAbsAlertManageProcessOfMobile = getAbsAlertManageProcessOfMobile;
         this.buildAlertProcessTypeMap();
