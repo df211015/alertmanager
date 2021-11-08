@@ -31,7 +31,7 @@ public class AlertManageProcessOfIp extends AbsAlertManageProcess {
         try {
             //获取redis监控key
             String redisObserveKey = RedisKey.formatKey(RedisKey.ALERT_IP, observeKey);
-            //获取ip的约束参数
+            //获取约束参数
             Map<String, Integer> alertManage_param_ip = BaseDataService.AlertManage_Param_Ip;
             RestrainItemDto restrainItemDto = super.getRestrainItemDto(alertManage_param_ip);
             Boolean hasKey = this.redisUtil.hasHaKey(redisObserveKey);
