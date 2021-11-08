@@ -3,6 +3,8 @@ package com.taoche.alertmanage.service.impl;
 import com.taoche.alertmanage.constants.EResCode;
 import com.taoche.alertmanage.dto.ResultDto;
 
+import java.sql.ResultSet;
+
 /**
  *
  */
@@ -38,6 +40,15 @@ public class GenerateResultFactory {
         ResultDto build = new ResultDto.ResultDtoBuilder()
                 .buildCode(EResCode.Fail.getCode())
                 .buildMessage(msg)
+                .buildData(data)
+                .build();
+        return build;
+    }
+
+    public static ResultDto generateFailureResult(EResCode resCode, Object data) {
+        ResultDto build = new ResultDto.ResultDtoBuilder()
+                .buildCode(resCode.getCode())
+                .buildMessage(resCode.getDescription())
                 .buildData(data)
                 .build();
         return build;

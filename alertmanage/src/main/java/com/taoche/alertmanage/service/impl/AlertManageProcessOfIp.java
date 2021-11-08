@@ -2,6 +2,7 @@ package com.taoche.alertmanage.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.taoche.alertmanage.constants.ELockStatus;
+import com.taoche.alertmanage.constants.EResCode;
 import com.taoche.alertmanage.dto.ObserveItemDto;
 import com.taoche.alertmanage.dto.RestrainItemDto;
 import com.taoche.alertmanage.dto.ResultDto;
@@ -51,13 +52,17 @@ public class AlertManageProcessOfIp extends AbsAlertManageProcess {
                             observeItemDto = super.buildObserveItemDto(redisObserveKey, visitCount, timeInMillis, restrainItemDto.getLockTime(), ELockStatus.LOCKED.getCode());
                             this.redisUtil.setHa(redisObserveKey, JSON.toJSONString(observeItemDto), observeItemDto.getTimestamp());
                             log.info(String.format("ip:%s,已达最高访问次数:%s,被锁定:%s分钟,访问失败", observeKey, restrainItemDto.getMaxCount(), restrainItemDto.getLockTime()));
-                            return GenerateResultFactory.generateSuccessResultOfMsg("已达最高访问次数!", null);
+                            return GenerateResultFactory.generateFailureResult(EResCode.Locked_maxCount_ip, null);
                         }
                     } else {
                         log.info(String.format("ip:%s,已被锁定,访问失败", observeKey));
-                        return GenerateResultFactory.generateSuccessResultOfMsg("访问被锁定!", null);
+                        return GenerateResultFactory.generateFailureResult(EResCode.Locked_ip, null);
                     }
                 }
+            } else {
+                Long timeInMillis = super.getTimeInMillis();
+                ObserveItemDto observeItemDto = super.buildObserveItemDto(redisObserveKey, 1, timeInMillis, restrainItemDto.getLockTime(), ELockStatus.UNLOCK.getCode());
+                this.redisUtil.setHa(redisObserveKey, JSON.toJSONString(observeItemDto), observeItemDto.getTimestamp());
             }
         } catch (Exception ex) {
             log.info("AlertManageProcessOfIp.alertManageProcess处理异常", ex);
