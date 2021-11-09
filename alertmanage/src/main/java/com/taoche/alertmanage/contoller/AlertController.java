@@ -1,8 +1,6 @@
 package com.taoche.alertmanage.contoller;
 
-import com.alibaba.fastjson.JSON;
 import com.taoche.alertmanage.constants.EAlertProcessType;
-import com.taoche.alertmanage.dto.RestrainItemDto;
 import com.taoche.alertmanage.dto.ResultDto;
 import com.taoche.alertmanage.service.impl.AlertManageProcessContext;
 import com.taoche.alertmanage.service.impl.GenerateResultFactory;
@@ -19,8 +17,8 @@ public class AlertController {
     /**
      * ip访问频率预警
      *
-     * @param ip
-     * @return
+     * @param ip 访问ip
+     * @return ResultDto
      */
     @GetMapping("/ip")
     public ResultDto alertIp(@RequestParam String ip) {
@@ -35,8 +33,8 @@ public class AlertController {
     /**
      * 手机号访问频率预警
      *
-     * @param mobile
-     * @return
+     * @param mobile 手机号
+     * @return ResultDto
      */
     @GetMapping("/mobile")
     public ResultDto alertMobile(@RequestParam String mobile) {
