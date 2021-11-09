@@ -9,7 +9,7 @@ import java.util.Map;
 
 @Data
 @Configuration
-@ConfigurationProperties(prefix = "alert.restrain")
+@ConfigurationProperties(prefix = "alert.config")
 public class RestrainInfoConfig {
-    private Map<String, RestrainItemDto> accountMap;
+    private Map<String, RestrainItemDto> restrain;
 }

@@ -17,12 +17,13 @@ spring:
         max-idle: 8 # 连接池中的最大空闲连接
         min-idle: 0 # 连接池中的最小空闲连接
 alert:
-  restrain:
-    ip:
-      interval:10
-      maxCount:200
-      lockTime:5
-    mobile:
-      interval:60
-      maxCount:5
-      lockTime:5
+  config:
+    restrain:
+      ip:
+        interval: 10
+        maxCount: 200
+        lockTime: 5
+      mobile:
+        interval: 60
+        maxCount: 5
+        lockTime: 5

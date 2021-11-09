@@ -21,7 +21,7 @@ public final class BaseDataService {
      */
     public RestrainItemDto getRestrainOfIp() {
         String mapKey = ProjConstants.Config_restrain_ip;
-        RestrainItemDto restrainItemDto = this.restrainInfoConfig.getAccountMap().get(mapKey);
+        RestrainItemDto restrainItemDto = this.restrainInfoConfig.getRestrain().get(mapKey);
         return restrainItemDto;
     }
 
@@ -32,7 +32,7 @@ public final class BaseDataService {
      */
     public RestrainItemDto getRestrainOfMobile() {
         String mapKey = ProjConstants.Config_restrain_mobile;
-        RestrainItemDto restrainItemDto = this.restrainInfoConfig.getAccountMap().get(mapKey);
+        RestrainItemDto restrainItemDto = this.restrainInfoConfig.getRestrain().get(mapKey);
         return restrainItemDto;
     }
 }
