@@ -3,8 +3,6 @@ package com.taoche.alertmanage.service.impl;
 import com.taoche.alertmanage.constants.EResCode;
 import com.taoche.alertmanage.dto.ResultDto;
 
-import java.sql.ResultSet;
-
 /**
  * 简单工厂模式
  */

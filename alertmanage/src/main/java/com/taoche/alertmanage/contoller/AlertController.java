@@ -1,8 +1,6 @@
 package com.taoche.alertmanage.contoller;
 
-import com.google.gson.Gson;
 import com.taoche.alertmanage.constants.EAlertProcessType;
-import com.taoche.alertmanage.dto.ObserveItemDto;
 import com.taoche.alertmanage.dto.ResultDto;
 import com.taoche.alertmanage.service.impl.AlertManageProcessContext;
 import com.taoche.alertmanage.service.impl.GenerateResultFactory;
@@ -49,11 +47,7 @@ public class AlertController {
     }
 
     @GetMapping("/mytest")
-    @ResponseBody
     public ResultDto testResult() {
-        String str = "{\"observeItemKey\":\"alertmanage:ip:1921681030\",\"visitCount\":1,\"timestamp\":1636439678534}";
-        ObserveItemDto observeItemDto = new Gson().fromJson(str, ObserveItemDto.class);
-
         ResultDto resultDto = GenerateResultFactory.generateFailureResult(null);
         return resultDto;
     }
