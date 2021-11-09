@@ -54,23 +54,6 @@ public abstract class AbsAlertManageProcess {
     }
 
     /**
-     * 获取约束
-     *
-     * @return
-     */
-    public RestrainItemDto getRestrainItemDto(Map<String, Integer> map) {
-        RestrainItemDto restrainItemDto = new RestrainItemDto();
-        Integer interval = map.get(ProjConstants.Config_item_interval);
-        Integer maxCount = map.get(ProjConstants.Config_item_maxCount);
-        Integer lockTime = map.get(ProjConstants.Config_item_lockTime);
-        restrainItemDto.setInterval(interval);
-        restrainItemDto.setMaxCount(maxCount);
-        restrainItemDto.setLockTime(lockTime);
-
-        return restrainItemDto;
-    }
-
-    /**
      * 预警处理
      *
      * @param observeKey 监控key

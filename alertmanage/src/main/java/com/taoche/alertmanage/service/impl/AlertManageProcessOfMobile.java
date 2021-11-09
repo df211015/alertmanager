@@ -1,6 +1,7 @@
 package com.taoche.alertmanage.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.taoche.alertmanage.config.RestrainInfoConfig;
 import com.taoche.alertmanage.constants.ELockStatus;
 import com.taoche.alertmanage.constants.EResCode;
 import com.taoche.alertmanage.dto.ObserveItemDto;
@@ -22,6 +23,8 @@ import java.util.Map;
 @Slf4j
 @Service(value = "AlertManageProcessOfMobile")
 public class AlertManageProcessOfMobile extends AbsAlertManageProcess {
+    @Autowired
+    private BaseDataService baseDataService;
 
     @Autowired
     private RedisUtil redisUtil;
@@ -32,8 +35,7 @@ public class AlertManageProcessOfMobile extends AbsAlertManageProcess {
             //获取redis监控key
             String redisObserveKey = RedisKey.formatKey(RedisKey.ALERT_MOBILE, observeKey);
             //获取约束参数
-            Map<String, Integer> alertManage_param_mobile = BaseDataService.AlertManage_Param_Mobile;
-            RestrainItemDto restrainItemDto = super.getRestrainItemDto(alertManage_param_mobile);
+            RestrainItemDto restrainItemDto = this.baseDataService.getRestrainOfMobile();
             Boolean hasKey = this.redisUtil.hasHaKey(redisObserveKey);
             if (hasKey) {
                 Object obj = this.redisUtil.getHa(redisObserveKey);

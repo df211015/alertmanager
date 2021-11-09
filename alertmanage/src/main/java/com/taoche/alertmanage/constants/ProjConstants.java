@@ -8,17 +8,12 @@ public final class ProjConstants {
     }
 
     /**
-     * 间隔时间属性
+     * 约束_ip
      */
-    public static final String Config_item_interval = "interval";
+    public static final String Config_restrain_ip = "ip";
 
     /**
-     * 阀值属性
+     * 约束_mobile
      */
-    public static final String Config_item_maxCount = "maxCount";
-
-    /**
-     * 锁定时间属性
-     */
-    public static final String Config_item_lockTime = "lockTime";
+    public static final String Config_restrain_mobile = "mobile";
 }
