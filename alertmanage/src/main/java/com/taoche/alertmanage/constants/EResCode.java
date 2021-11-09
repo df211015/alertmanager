@@ -4,7 +4,7 @@ package com.taoche.alertmanage.constants;
  * 返回code定义
  */
 public enum EResCode {
-    SUCCESS(1, "成功"),
+    SUCCESS(0, "成功"),
     Fail(400, "失败"),
     Exception_generic(401, "异常"),
     Locked(420, "访问锁定"),

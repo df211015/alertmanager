@@ -1,6 +1,8 @@
 package com.taoche.alertmanage.contoller;
 
+import com.alibaba.fastjson.JSON;
 import com.taoche.alertmanage.constants.EAlertProcessType;
+import com.taoche.alertmanage.dto.RestrainItemDto;
 import com.taoche.alertmanage.dto.ResultDto;
 import com.taoche.alertmanage.service.impl.AlertManageProcessContext;
 import com.taoche.alertmanage.service.impl.GenerateResultFactory;
@@ -48,7 +50,7 @@ public class AlertController {
 
     @GetMapping("/mytest")
     public ResultDto testResult() {
-        ResultDto resultDto = GenerateResultFactory.generateFailureResult(null);
+        ResultDto resultDto = GenerateResultFactory.generateSuccessResult(null);
         return resultDto;
     }
 }

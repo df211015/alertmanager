@@ -1,12 +1,14 @@
 package com.taoche.alertmanage.dto;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.google.gson.Gson;
 import lombok.Data;
 
 /**
  * 建造ResultDto
  */
-@JsonSerialize(include= JsonSerialize.Inclusion.NON_NULL)
+@Data
+@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 public class ResultDto {
     private Integer code;
     private String message;
@@ -16,6 +18,11 @@ public class ResultDto {
         this.code = builder.getCode();
         this.message = builder.getMessage();
         this.data = builder.getData();
+    }
+
+    @Override
+    public String toString() {
+        return new Gson().toJson(this);
     }
 
     @Data
