@@ -1,7 +1,6 @@
 package com.taoche.alertmanage.service.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.taoche.alertmanage.config.RestrainInfoConfig;
 import com.taoche.alertmanage.constants.ELockStatus;
 import com.taoche.alertmanage.constants.EResCode;
 import com.taoche.alertmanage.dto.ObserveItemDto;
@@ -14,8 +13,6 @@ import com.taoche.alertmanage.service.BaseDataService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Map;
 
 /**
  * 电话频次预警
