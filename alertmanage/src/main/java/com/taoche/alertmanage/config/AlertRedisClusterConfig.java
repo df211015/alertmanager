@@ -12,6 +12,7 @@ import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisClientConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
@@ -70,6 +71,7 @@ public class AlertRedisClusterConfig {
         RedisSerializer stringSerializer = new StringRedisSerializer();
         redisTemplate.setKeySerializer(stringSerializer); // key序列化
         redisTemplate.setValueSerializer(jackson2JsonRedisSerializer); // value序列化
+//        redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer());
         redisTemplate.setHashKeySerializer(stringSerializer); // Hash key序列化
         redisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer); // Hash value序列化
         redisTemplate.afterPropertiesSet();

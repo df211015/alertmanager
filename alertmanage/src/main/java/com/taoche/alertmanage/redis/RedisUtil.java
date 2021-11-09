@@ -109,7 +109,8 @@ public final class RedisUtil {
      */
     public Object getHa(String key) {
         try {
-            return key == null ? null : this.alertRedisTemplate.opsForValue().get(key);
+            Object value = (key == null) ? null : this.alertRedisTemplate.opsForValue().get(key);
+            return value;
         } catch (Exception e) {
             log.info("redis 操作异常：" + e.getMessage());
             return null;

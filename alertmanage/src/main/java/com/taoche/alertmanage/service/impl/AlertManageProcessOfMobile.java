@@ -1,6 +1,5 @@
 package com.taoche.alertmanage.service.impl;
 
-import com.alibaba.fastjson.JSON;
 import com.taoche.alertmanage.constants.ELockStatus;
 import com.taoche.alertmanage.constants.EResCode;
 import com.taoche.alertmanage.dto.ObserveItemDto;
@@ -36,7 +35,8 @@ public class AlertManageProcessOfMobile extends AbsAlertManageProcess {
             Boolean hasKey = this.redisUtil.hasHaKey(redisObserveKey);
             if (hasKey) {
                 Object obj = this.redisUtil.getHa(redisObserveKey);
-                ObserveItemDto observeItemDto = JSON.parseObject(JSON.toJSONString(obj), ObserveItemDto.class);
+                String strJson = obj.toString();
+                ObserveItemDto observeItemDto = super.gson.fromJson(strJson.toString(), ObserveItemDto.class);
                 if (null != observeItemDto) {
                     Integer isLock = observeItemDto.getIsLock();
                     if (ELockStatus.UNLOCK.getCode().equals(isLock)) {
@@ -45,11 +45,10 @@ public class AlertManageProcessOfMobile extends AbsAlertManageProcess {
                             //指定业务键在未锁定状态进入计数加数处理
                             observeItemDto.setVisitCount(visitCount + 1);
                             observeItemDto.setIsLock(ELockStatus.UNLOCK.getCode());
-                            this.redisUtil.setHa(redisObserveKey, JSON.toJSONString(observeItemDto), observeItemDto.getTimestamp());
+                            this.redisUtil.setHa(redisObserveKey, super.gson.toJson(observeItemDto), observeItemDto.getTimestamp());
                         } else {
-                            Long timeInMillis = super.getTimeInMillis();
-                            observeItemDto = super.buildObserveItemDto(redisObserveKey, visitCount, timeInMillis, restrainItemDto.getLockTime(), ELockStatus.LOCKED.getCode());
-                            this.redisUtil.setHa(redisObserveKey, JSON.toJSONString(observeItemDto), observeItemDto.getTimestamp());
+                            observeItemDto = super.buildObserveItemDto(redisObserveKey, visitCount, restrainItemDto.getInterval(), ELockStatus.LOCKED.getCode());
+                            this.redisUtil.setHa(redisObserveKey, super.gson.toJson(observeItemDto), observeItemDto.getTimestamp());
                             log.info(String.format("mobile:%s,已达最高访问次数:%s,被锁定:%s分钟,访问失败", observeKey, restrainItemDto.getMaxCount(), restrainItemDto.getLockTime()));
                             return GenerateResultFactory.generateFailureResult(EResCode.Locked_maxCount, null);
                         }
@@ -59,9 +58,8 @@ public class AlertManageProcessOfMobile extends AbsAlertManageProcess {
                     }
                 }
             } else {
-                Long timeInMillis = super.getTimeInMillis();
-                ObserveItemDto observeItemDto = super.buildObserveItemDto(redisObserveKey, 1, timeInMillis, restrainItemDto.getLockTime(), ELockStatus.UNLOCK.getCode());
-                this.redisUtil.setHa(redisObserveKey, JSON.toJSONString(observeItemDto), observeItemDto.getTimestamp());
+                ObserveItemDto observeItemDto = super.buildObserveItemDto(redisObserveKey, 1, restrainItemDto.getInterval(), ELockStatus.UNLOCK.getCode());
+                this.redisUtil.setHa(redisObserveKey, super.gson.toJson(observeItemDto), observeItemDto.getTimestamp());
             }
         } catch (Exception ex) {
             log.info("AlertManageProcessOfIp.alertManageProcess处理异常", ex);

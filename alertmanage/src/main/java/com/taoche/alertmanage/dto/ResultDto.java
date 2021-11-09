@@ -1,10 +1,12 @@
 package com.taoche.alertmanage.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 
 /**
  * 建造ResultDto
  */
+@JsonSerialize(include= JsonSerialize.Inclusion.NON_NULL)
 public class ResultDto {
     private Integer code;
     private String message;

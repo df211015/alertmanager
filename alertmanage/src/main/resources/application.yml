@@ -20,7 +20,7 @@ alert:
   config:
     restrain:
       ip:
-        interval: 10
+        interval: 1
         maxCount: 200
         lockTime: 5
       mobile:

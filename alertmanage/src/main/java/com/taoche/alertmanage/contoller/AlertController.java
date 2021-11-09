@@ -1,14 +1,14 @@
 package com.taoche.alertmanage.contoller;
 
+import com.google.gson.Gson;
 import com.taoche.alertmanage.constants.EAlertProcessType;
+import com.taoche.alertmanage.dto.ObserveItemDto;
 import com.taoche.alertmanage.dto.ResultDto;
 import com.taoche.alertmanage.service.impl.AlertManageProcessContext;
 import com.taoche.alertmanage.service.impl.GenerateResultFactory;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.text.MessageFormat;
 
 @RestController
 @RequestMapping("/alert")
@@ -45,6 +45,16 @@ public class AlertController {
         }
         ResultDto resultDto = this.alertManageProcessContext.alertProcess(EAlertProcessType.MOBILE, mobile);
 
+        return resultDto;
+    }
+
+    @GetMapping("/mytest")
+    @ResponseBody
+    public ResultDto testResult() {
+        String str = "{\"observeItemKey\":\"alertmanage:ip:1921681030\",\"visitCount\":1,\"timestamp\":1636439678534}";
+        ObserveItemDto observeItemDto = new Gson().fromJson(str, ObserveItemDto.class);
+
+        ResultDto resultDto = GenerateResultFactory.generateFailureResult(null);
         return resultDto;
     }
 }
